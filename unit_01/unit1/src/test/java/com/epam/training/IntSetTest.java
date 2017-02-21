@@ -1,7 +1,9 @@
 package com.epam.training;
 
+import org.junit.Before;
 import org.junit.Test;
 
+import static junit.framework.TestCase.assertEquals;
 import static junit.framework.TestCase.assertFalse;
 import static junit.framework.TestCase.assertTrue;
 
@@ -9,6 +11,8 @@ import static junit.framework.TestCase.assertTrue;
  * Created by Ilya Kulakov on 11.02.17.
  */
 public class IntSetTest {
+
+
     @Test
     public void add() throws Exception {
         IntSet set = new IntSet();
@@ -16,15 +20,15 @@ public class IntSetTest {
         set.add(394);
         set.add(687);
         set.add(0);
-        try{
+        try {
             set.add(Integer.MAX_VALUE);
-        }catch (ArrayIndexOutOfBoundsException e){
+        } catch (ArrayIndexOutOfBoundsException e) {
             System.out.println("Try insert too big number");
         }
 
-        try{
+        try {
             set.add(Integer.MIN_VALUE);
-        }catch (ArrayIndexOutOfBoundsException e){
+        } catch (ArrayIndexOutOfBoundsException e) {
             System.out.println("Try insert negative number");
         }
     }
@@ -60,7 +64,7 @@ public class IntSetTest {
         intSet.add(0);
         try {
             intSet.add(Integer.MAX_VALUE);
-        }catch (ArrayIndexOutOfBoundsException e){
+        } catch (ArrayIndexOutOfBoundsException e) {
             System.out.println("Try insert too big number");
         }
 
@@ -99,6 +103,25 @@ public class IntSetTest {
         subSet.remove(0);
         subSet.remove(62);
 //            case when intSet < subSet
+//        intSet.add(0);
+//        intSet.add(3);
+//
+//        subSet.add(56);
+//        subSet.add(72);
+//
+//        intSet.union(subSet);
+//
+//        assertTrue(intSet.contains(3));
+//        assertTrue(intSet.contains(56));
+//        assertTrue(intSet.contains(72));
+
+    }
+
+    @Test
+    public void unionWhenSubSetGratherThenMainSet() {
+        IntSet intSet = new IntSet();
+        IntSet subSet = new IntSet();
+
         intSet.add(0);
         intSet.add(3);
 
@@ -110,7 +133,21 @@ public class IntSetTest {
         assertTrue(intSet.contains(3));
         assertTrue(intSet.contains(56));
         assertTrue(intSet.contains(72));
-
     }
 
+    @Test
+    public void testWhenOneOfSetsEmpty() {
+        IntSet firstSet = new IntSet();
+        IntSet secondSet = new IntSet();
+        for (int i = 0; i < 10; i++) {
+            secondSet.add(i);
+        }
+        firstSet.union(secondSet);
+        assertTrue(secondSet.contains(0));
+        assertTrue(secondSet.contains(1));
+        assertTrue(secondSet.contains(2));
+        assertTrue(secondSet.contains(3));
+        assertTrue(secondSet.contains(4));
+
+    }
 }

@@ -23,8 +23,9 @@ public class IntSet {
     }
 
     /**
-     *Resize set if it`s enable
+     * Resize set if it`s enable
      * in case u try to insert  value grather than max value in set
+     *
      * @param valueToInput
      * @return
      */
