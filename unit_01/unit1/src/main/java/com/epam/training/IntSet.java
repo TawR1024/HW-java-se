@@ -15,9 +15,6 @@ public class IntSet {
     public IntSet() {
     }
 
-    /**
-     * @param data
-     */
     private IntSet(long[] data) {
         this.data = data;
     }
@@ -42,7 +39,7 @@ public class IntSet {
      * Add new element to IntSet.
      *
      * @param value what will insert to IntSet
-     * @throws ArrayIndexOutOfBoundsException when u try to insert value < 0
+     * @throws ArrayIndexOutOfBoundsException when you try to insert value < 0
      */
     public void add(int value) throws ArrayIndexOutOfBoundsException {
         if (value < 0) throw new ArrayIndexOutOfBoundsException();
@@ -55,14 +52,15 @@ public class IntSet {
      * Remove value from IntSet if available
      *
      * @param value
+     * @throws IndexOutOfBoundsException if value < 0  || value > max possible value
      */
-    public void remove(int value) throws ArrayIndexOutOfBoundsException {
+    public void remove(int value) throws IndexOutOfBoundsException {
         if (value < 0 || arraySize < value) throw new IndexOutOfBoundsException();
         data[value / 64] &= ~(1L << value % 64);
     }
 
     /**
-     * Check if value conntains in IntSet
+     * Check if value contains in IntSet
      *
      * @param value
      * @return true if value contains in IntSet, false if value not contains in
@@ -78,6 +76,7 @@ public class IntSet {
 
 
     /**
+     * Unite set and current set. At the end final set wil be
      * @param set
      */
     public void union(IntSet set) {

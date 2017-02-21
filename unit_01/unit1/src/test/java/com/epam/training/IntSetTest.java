@@ -14,7 +14,7 @@ public class IntSetTest {
 
 
     @Test
-    public void add() throws Exception {
+    public void testAdd() throws Exception {
         IntSet set = new IntSet();
         set.add(6);
         set.add(394);
@@ -34,7 +34,7 @@ public class IntSetTest {
     }
 
     @Test
-    public void remove() throws Exception {
+    public void testRemove() throws Exception {
         IntSet intSet = new IntSet();
         intSet.add(0);
         intSet.add(48);
@@ -56,7 +56,7 @@ public class IntSetTest {
     }
 
     @Test
-    public void contains() throws Exception {
+    public void testContains() throws Exception {
         IntSet intSet = new IntSet();
         intSet.add(6);
         intSet.add(394);
@@ -83,7 +83,7 @@ public class IntSetTest {
     }
 
     @Test
-    public void union() throws Exception {
+    public void testUnion() throws Exception {
         IntSet intSet = new IntSet();
         IntSet subSet = new IntSet();
 
@@ -118,7 +118,7 @@ public class IntSetTest {
     }
 
     @Test
-    public void unionWhenSubSetGratherThenMainSet() {
+    public void testUnionWhenSubSetGratherThenMainSet() {
         IntSet intSet = new IntSet();
         IntSet subSet = new IntSet();
 
