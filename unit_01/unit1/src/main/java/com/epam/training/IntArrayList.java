@@ -65,9 +65,8 @@ public class IntArrayList {
 
     public void sort() {
         // mergeSort(data, 0, getSize(), new int[getSize()]);
-        upRisingMergeSort(data,1);
+        upRisingMergeSort(data, 1);
     }
-
 
     /**
      * Expects collection to be sorted.
@@ -191,18 +190,18 @@ public class IntArrayList {
         }
     }
 
-    public void upRisingMergeSort(int[] data,int offset) {
-        if (offset >=data.length) {
+    public void upRisingMergeSort(int[] data, int offset) {
+        if (offset >= data.length) {
             return;
         }
         int[] newData = new int[data.length];
-        for(int i=offset-1, j=i+1; i<data.length-1; i++, j++) {
-            if(data[i]>data[j]) {
+        for (int i = offset - 1, j = i + 1; i < data.length - 1; i++, j++) {
+            if (data[i] > data[j]) {
                 newData[i] = data[j];
-                newData[j]=data[i];
+                newData[j] = data[i];
             }
         }
         data = newData;
-        upRisingMergeSort(data,offset+1);
+        upRisingMergeSort(data, offset + 1);
     }
 }

@@ -9,33 +9,34 @@ import static org.junit.Assert.*;
 /**
  * Created by Ilya Kulakov on 05.02.17.
  */
-public class IntArrayListTest{
+public class IntArrayListTest {
     @Test
-    public void upRisingMergeSort() throws Exception {
-        int[] ints  = { 2,1,4,3,6,5};
-        int[] expectedInts = {1,2,3,4,5,6};
+    public void testUpRisingMergeSort() throws Exception {
+        int[] ints = {2, 1, 4, 3, 6, 5};
+        int[] expectedInts = {1, 2, 3, 4, 5, 6};
         final IntArrayList list = new IntArrayList(ints);
         list.sort();
-        for(int i = 0; i < 6;i++){
+        for (int i = 0; i < 6; i++) {
             System.out.println(list.get(i));
         }
     }
 
     @Test
-    public void binarySearchWithRecomendedPalce() throws Exception {
+    public void testBinarySearchWithRecomendedPalce() throws Exception {
         final int[] ints = {Integer.MIN_VALUE, -1, 0, 5, 3912, 12356, Integer.MAX_VALUE};
         final int[] expected = Arrays.copyOf(ints, ints.length);
         Arrays.sort(expected);
 
         final IntArrayList list = new IntArrayList(ints);
         assertEquals(4, list.binarySearchWithRecomendedPalce(6));
-        assertEquals(6, list.binarySearchWithRecomendedPalce(Integer.MAX_VALUE-1));
+        assertEquals(6, list.binarySearchWithRecomendedPalce(Integer.MAX_VALUE - 1));
     }
 
     @Test
-    public void sort() throws Exception {
+    public void testSort() throws Exception {
         final int[] ints = {12, 0, -13, 666, 2, 56, 56, 56, 120, -1, 1, 0, Integer.MAX_VALUE, Integer.MIN_VALUE};
         final int[] expected = Arrays.copyOf(ints, ints.length);
+
         Arrays.sort(expected);
 
         final IntArrayList list = new IntArrayList(ints);
@@ -47,11 +48,8 @@ public class IntArrayListTest{
         }
     }
 
-
     @Test
-    public void binarySearch() throws Exception {
-
-//        final int[] ints = {12, 0, -13, 666, 2, 56, 56, 56, 120, -1, 1, 0, Integer.MAX_VALUE, Integer.MIN_VALUE};
+    public void testBinarySearch() throws Exception {
         final int[] ints = {Integer.MIN_VALUE, -1, 0, 5, 3912, 12356, Integer.MAX_VALUE};
         final int[] expected = Arrays.copyOf(ints, ints.length);
         Arrays.sort(expected);
