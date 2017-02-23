@@ -23,6 +23,7 @@ public class TestPen {
     @Test
     public void myToStringMethodTest() {
         Pen myPen = new Pen("Parker", Color.GREEN);
+        System.out.println(myPen.myToString());
     }
 
     @Test
@@ -31,7 +32,7 @@ public class TestPen {
         assertEquals(0, myPen.myHashCode());
         myPen.setIncColor(Color.GREEN);
         myPen.setManufactureName("Pelican");
-        int hash = Color.GREEN.hashCode() + "Pelican".hashCode();
+        int hash = 47 * Color.GREEN.hashCode() + "Pelican".hashCode();
         System.out.println(myPen.hashCode());
         assertEquals(hash, myPen.myHashCode());
     }
@@ -40,13 +41,13 @@ public class TestPen {
     public void myEqualsTest() {
         Pen greenPen1 = new Pen("Parker", Color.GREEN);
         Pen greenPen2 = new Pen("Parker", Color.GREEN);
-        Pen blackPen3 = new Pen("Parker", Color.BLACK);
-        Pen blackPen4 = new Pen("Pelican", Color.BLACK);
-        Pen blackPen5 = new Pen("Citizen", Color.RED);
+        Pen greenPen3 = new Pen("Parker", Color.GREEN);
+
+        assertTrue(greenPen1.myEquals(greenPen1));
+
         assertTrue(greenPen1.myEquals(greenPen2));
-        assertFalse(greenPen1.myEquals(blackPen3));
-        assertFalse(greenPen1.myEquals(blackPen4));
-        assertFalse(greenPen1.myEquals(blackPen5));
+        assertTrue(greenPen2.myEquals(greenPen3));
+        assertTrue(greenPen3.myEquals(greenPen1));
     }
 
 }

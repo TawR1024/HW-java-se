@@ -36,7 +36,7 @@ public class Pen {
     }
 
     public int myHashCode() {
-        return (int) ((manufactureName == null) ? 0 : (manufactureName.hashCode() + ((incColor == null) ? 0 : incColor.hashCode())));
+        return (int) ((manufactureName == null) ? 0 : (manufactureName.hashCode() + ((incColor == null) ? 0 : incColor.hashCode() * 47)));
     }
 
     public boolean myEquals(Object penToCompare) {
@@ -50,16 +50,44 @@ public class Pen {
         if (getClass() != penToCompare.getClass()) {
             return false;
         }
-        if (this.incColor != ((Pen) penToCompare).getIncColor()) {
+        if (!this.manufactureName.equals(((Pen)penToCompare).getManufactureName())) {
             return false;
         } else {
-            if (this.manufactureName != ((Pen) penToCompare).getManufactureName()) {
+            if(!this.incColor.equals(((Pen) penToCompare).getIncColor())){
                 return false;
             }
         }
         return true;
     }
 
+    // hashCode(), equals(), toString(); proposed By IDEA
+
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Pen pen = (Pen) o;
+
+        if (!manufactureName.equals(pen.manufactureName)) return false;
+        return incColor == pen.incColor;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = manufactureName.hashCode();
+        result = 31 * result + incColor.hashCode();
+        return result;
+    }
+
+    @Override
+    public String toString() {
+        return "Pen{" +
+                "manufactureName='" + manufactureName + '\'' +
+                ", incColor=" + incColor +
+                '}';
+    }
 }
 
 enum Color {RED, BLUE, GREEN, BLACK}
