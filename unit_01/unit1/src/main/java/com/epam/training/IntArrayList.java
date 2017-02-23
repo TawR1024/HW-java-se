@@ -3,6 +3,10 @@ package com.epam.training;
 import java.util.Arrays;
 import java.util.NoSuchElementException;
 
+
+/**
+ * IntArrayList 
+ */
 public class IntArrayList {
     private int[] data;
     private int size;
