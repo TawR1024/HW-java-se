@@ -39,6 +39,27 @@ public class Pen {
         return (int) ((manufactureName == null) ? 0 : (manufactureName.hashCode() + ((incColor == null) ? 0 : incColor.hashCode())));
     }
 
+    public boolean myEquals(Object penToCompare) {
+        if (this == penToCompare) {
+            return true;
+        }
+        if (penToCompare == null) {
+            return false;
+        }
+
+        if (getClass() != penToCompare.getClass()) {
+            return false;
+        }
+        if (this.incColor != ((Pen) penToCompare).getIncColor()) {
+            return false;
+        } else {
+            if (this.manufactureName != ((Pen) penToCompare).getManufactureName()) {
+                return false;
+            }
+        }
+        return true;
+    }
+
 }
 
 enum Color {RED, BLUE, GREEN, BLACK}
