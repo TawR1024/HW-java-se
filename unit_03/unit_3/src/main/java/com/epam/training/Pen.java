@@ -35,6 +35,10 @@ public class Pen {
         return getClass().getName() + '@' + "Manufacture: " + getManufactureName() + ", Inc Color: " + getIncColor();
     }
 
+    public int myHashCode() {
+        return (int) ((manufactureName == null) ? 0 : (manufactureName.hashCode() + ((incColor == null) ? 0 : incColor.hashCode())));
+    }
+
 }
 
 enum Color {RED, BLUE, GREEN, BLACK}
