@@ -22,8 +22,8 @@ public class TestPen {
 
     @Test
 
-    public  void toStringMethodTest() {
+    public  void myToStringMethodTest() {
         Pen myPen = new Pen("Parker", Color.GREEN);
-        System.out.println(myPen.toString());
+        System.out.println(myPen.myToString());
     }
 }

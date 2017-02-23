@@ -31,10 +31,9 @@ public class Pen {
         return incColor;
     }
 
-    public String toString() {
-        return "Pen: " + getManufactureName() + " " + getIncColor();
+    public String myToString() {
+        return getClass().getName() + '@' + "Manufacture: " + getManufactureName() + ", Inc Color: " + getIncColor();
     }
-
 
 }
 
