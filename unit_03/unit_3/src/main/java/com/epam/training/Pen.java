@@ -3,6 +3,13 @@ package com.epam.training;
 /**
  * Created by Ilya Kulakov on 21.02.17.
  */
+
+
+/**
+ * Class Pen - Task 1 for unit_02
+ *
+ * In this class I had to override equals(), hashCode() and toString() methods.
+ */
 public class Pen {
     private String manufactureName;
     private Color incColor;
@@ -31,14 +38,27 @@ public class Pen {
         return incColor;
     }
 
+    /**
+     * This method returns a string representation of Pen`s object
+     * @return Class name and string representation of fields manufactureName, IncColor
+     */
     public String myToString() {
         return getClass().getName() + '@' + "Manufacture: " + getManufactureName() + ", Inc Color: " + getIncColor();
     }
 
+    /**
+     * @return hashCode of the Pen class objects
+     */
     public int myHashCode() {
-        return (int) ((manufactureName == null) ? 0 : (manufactureName.hashCode() + ((incColor == null) ? 0 : incColor.hashCode() * 47)));
+        return (int) ((manufactureName == null) ? 0 : (manufactureName.hashCode() +
+                + ((incColor == null) ? 0 : incColor.hashCode() * 47)));
     }
 
+    /**
+     *
+     * @param penToCompare object to compare
+     * @return true if penToCompare and this are equals, false otherwise
+     */
     public boolean myEquals(Object penToCompare) {
         if (this == penToCompare) {
             return true;
