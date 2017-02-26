@@ -8,11 +8,11 @@ public class CrazyLogger {
 
     public void addNewLogMessage(String message) {
         log.append(message);
-        log.append('\n');
+        log.append(";\n");
     }
 
     public String getLastMessage() {
-        return "nope";
+        return log.toString();
     }
     public void showLog() {
         System.out.println(log);
