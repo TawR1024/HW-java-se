@@ -4,9 +4,10 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 /**
- * CrazyLogger logs yours errors
+ * CrazyLogger logs yours errors;
  * <p>
- * CrazyLogger used to log errors. This logger does`t save log messages to the disk, all logs stored in RAM.
+ * <br>CrazyLogger used to log errors.</br>
+ * <br>This logger does`t save log messages to the disk, all logs stored in RAM.</br>
  *
  * @author Ilya Kulakov
  * @date 26.02.2017
@@ -18,11 +19,11 @@ public class CrazyLogger {
 
 
     /**
-     * Adds new message to the log
+     * Adds new message to the log;
      *
      * @param message to add
-     *                All messages will have format  dd-mm--YYYY:hh-mm - message;
-     *                Each message ends with ';' character
+     *                <br>All messages will have format  dd-mm--YYYY:hh-mm - message;</br>
+     *                <br>Each message ends with ';' character;</br>
      */
     public void addNewLogMessage(String message) {
         LocalDateTime now = LocalDateTime.now();
@@ -35,8 +36,8 @@ public class CrazyLogger {
     }
 
     /**
-     * @return string which contains last message in the log
-     * @throws RuntimeException if log is empty
+     * @return string which contains last message in the log;
+     * @throws RuntimeException if log is empty;
      */
     public String getLastMessage() throws RuntimeException {
         log.trimToSize();
