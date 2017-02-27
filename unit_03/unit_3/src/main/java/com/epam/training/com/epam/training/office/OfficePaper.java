@@ -3,8 +3,7 @@ package com.epam.training.com.epam.training.office;
 /**
  * Created by Ilya Kulakov on 27.02.17.
  */
-public class OfficePaper implements Cost {
-   private String manufactureName;
+public class OfficePaper extends OfficeAccessories implements Cost {
     private long costInCoins;
     private int width;
     private int height;
@@ -43,10 +42,6 @@ public class OfficePaper implements Cost {
     @Override
     public void setCost(long costInCoins) {
         this.costInCoins = costInCoins;
-    }
-
-    public String getManufactureName() {
-        return manufactureName;
     }
 
     public int getWidth() {
