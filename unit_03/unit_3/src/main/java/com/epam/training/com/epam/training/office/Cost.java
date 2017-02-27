@@ -5,5 +5,5 @@ package com.epam.training.com.epam.training.office;
  */
 public interface Cost {
     long getCost();
-    void setCost(float costInRubles);
+    void setCost(long costInCoins);
 }
