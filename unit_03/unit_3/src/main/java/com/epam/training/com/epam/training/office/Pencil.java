@@ -4,9 +4,7 @@ package com.epam.training.com.epam.training.office;
  * Created by Ilya Kulakov on 27.02.17.
  */
 public class Pencil extends OfficeAccessories implements Writable {
-
-    private long cost;
-
+    long cost;
     public Pencil(String manufactureName, long cost) {
         this.cost = cost;
         this.manufactureName = manufactureName;

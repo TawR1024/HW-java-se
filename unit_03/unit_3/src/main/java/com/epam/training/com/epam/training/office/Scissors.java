@@ -3,7 +3,13 @@ package com.epam.training.com.epam.training.office;
 /**
  * Created by Ilya Kulakov on 27.02.17.
  */
-public class Scissors implements Cutting {
+public class Scissors extends OfficeAccessories implements Cutting {
+    public  Scissors() {}
+    public Scissors(String manufatureName, long cost) {
+            this.manufactureName = manufatureName;
+            this.cost = cost;
+    }
+
     @Override
     public OfficePaper[] cut(OfficePaper pieceOfPaper, int numberOfSections, CutDirection direction) throws ArithmeticException {
         if (numberOfSections <= 0) {
