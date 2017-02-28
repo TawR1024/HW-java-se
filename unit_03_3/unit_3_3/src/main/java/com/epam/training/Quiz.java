@@ -9,6 +9,7 @@ public class Quiz {
 
 
     private String quizeName;
+    private Locale locale;
 
     public Quiz() {
 
@@ -18,6 +19,19 @@ public class Quiz {
         this.quizeName = quizName;
     }
 
-    public void chaooseLanguage(Locale locale) {
+    public void chaooseLanguage(int i) {
+        switch (i) {
+            case 1: locale = new Locale("ru", "Ru", "Unix");
+            break;
+            case 2: locale = new Locale("en", "En", "Unix");
+            break;
+            default: locale = Locale.getDefault();
+            break;
+        }
+
+    }
+
+    public String getLocale() {
+        return locale.getLanguage();
     }
 }
