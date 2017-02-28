@@ -5,17 +5,17 @@ import java.util.Locale;
 /**
  * Created by Ilya Kulakov on 28.02.17.
  */
-public class Quize {
+public class Quiz {
 
 
     private String quizeName;
 
-    public Quize() {
+    public Quiz() {
 
     }
 
-    public Quize(String quizeName) {
-        this.quizeName = quizeName;
+    public Quiz(String quizName) {
+        this.quizeName = quizName;
     }
 
     public void chaooseLanguage(Locale locale) {
