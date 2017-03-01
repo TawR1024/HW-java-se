@@ -4,7 +4,6 @@ import org.junit.Test;
 
 import java.util.Locale;
 
-import static com.sun.org.apache.xml.internal.serialize.LineSeparator.Unix;
 import static org.junit.Assert.assertEquals;
 
 /**
@@ -15,21 +14,29 @@ public class QuizTest {
     public void chooseLanguageRu() {
         Quiz quiz = new Quiz("Math for children");
         quiz.chaooseLanguage(1);
-        assertEquals(new Locale("ru", "Ru", "Unix").getLanguage(), quiz.getLocale());
+        assertEquals(new Locale("ru").getLanguage(), quiz.getLocale());
 
     }
+
     @Test
     public void chooseLanguageEn() {
         Quiz quiz = new Quiz("Math for children");
         quiz.chaooseLanguage(2);
-        assertEquals(new Locale("en", "En", "Unix").getLanguage(), quiz.getLocale());
+        assertEquals(new Locale("en").getLanguage(), quiz.getLocale());
 
     }
+
     @Test
     public void chooseLanguageDefault() {
         Quiz quiz = new Quiz("Math for children");
         quiz.chaooseLanguage(6);
         assertEquals(Locale.getDefault().getLanguage(), quiz.getLocale());
+    }
 
+    @Test
+    public void showQuestions() {
+        Quiz quiz = new Quiz("Math for children");
+        quiz.chaooseLanguage(2);
+        quiz.showQuestions();
     }
 }
