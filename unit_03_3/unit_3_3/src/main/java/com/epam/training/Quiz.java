@@ -17,8 +17,7 @@ public class Quiz {
 
     public static void main(String[] args) {
         Quiz quiz = new Quiz();
-        quiz.checkLocale();
-        quiz.showQuestions();
+        quiz.startQuiz();
     }
 
     public Quiz() {
@@ -51,22 +50,37 @@ public class Quiz {
         ResourceBundle resourceBundle = ResourceBundle.getBundle("messages", locale);
         System.out.println(locale.getLanguage());
         Enumeration<String> keys = resourceBundle.getKeys();
+        System.out.println(keys.toString());
         while (keys.hasMoreElements()) {
-            System.out.println(resourceBundle.getString(keys.nextElement()));
+            String key = keys.nextElement();
+            String question = resourceBundle.getString(key);
+            System.out.println(question);
         }
     }
 
     public void startQuiz() {
-
         checkLocale();
         showQuestions();
+        showAnswer();
+    }
 
-
+    private void showAnswer() {
+        Scanner scanner = new Scanner(System.in);
+        Integer numberOfQuestion;
+        for (; ; ) {
+            showQuestions();
+            System.out.print("Для введите номер вопроса, что бы увидеть ответ\nДля выхода нажмите 0\n>");
+            numberOfQuestion = scanner.nextInt();
+            if (numberOfQuestion == 0)
+                return;
+            ResourceBundle resourceBundle = ResourceBundle.getBundle("answer", locale);
+            System.out.println(resourceBundle.getString(numberOfQuestion.toString()));
+        }
     }
 
     public void checkLocale() {
         if (locale == null) {
-            System.out.println("To select language pres\n 1 - eng\n 2 - rus\n" +
+            System.out.print("To select language press\n 1 - eng\n 2 - rus\n" +
                     "Для выбора языка нажимите\n 1 - русский\n 2 - английский\n> ");
         }
         Scanner scanner = new Scanner(System.in);
