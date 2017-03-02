@@ -39,4 +39,10 @@ public class QuizTest {
         quiz.chaooseLanguage(2);
         quiz.showQuestions();
     }
+
+    @Test
+    public void checkL10nTest(){
+        Quiz quiz = new Quiz();
+        quiz.checkLocale();
+    }
 }
