@@ -1,10 +1,9 @@
 package com.epam.training;
 
 
-import java.util.Enumeration;
-import java.util.Locale;
-import java.util.ResourceBundle;
-import java.util.Scanner;
+import java.util.*;
+
+import static java.util.Collections.*;
 
 /**
  * Created by Ilya Kulakov on 28.02.17.
@@ -48,10 +47,10 @@ public class Quiz {
 
     public void showQuestions() {
         ResourceBundle resourceBundle = ResourceBundle.getBundle("messages", locale);
-        Enumeration<String> keys = resourceBundle.getKeys();
-       // System.out.println(keys.toString());
-        while (keys.hasMoreElements()) {
-            String key = keys.nextElement();
+        List<String> keys  = Collections.list(resourceBundle.getKeys());
+        Collections.sort(keys);
+        for(int i = 0; i < keys.size(); i++){
+            String key = keys.get(i);
             String question = resourceBundle.getString(key);
             System.out.println(question);
         }
@@ -64,15 +63,19 @@ public class Quiz {
 
     private void showAnswer() {
         Scanner scanner = new Scanner(System.in);
-        Integer numberOfQuestion;
+        ResourceBundle resourceBundle = ResourceBundle.getBundle("answer", locale);
+        List<String> keys = Collections.list(resourceBundle.getKeys());
+        Collections.sort(keys);
+        int numberOfQuestion;
+        String key;
         for (; ; ) {
             showQuestions();
             System.out.print("Для введите номер вопроса, что бы увидеть ответ\nДля выхода нажмите 0\n>");
             numberOfQuestion = scanner.nextInt();
             if (numberOfQuestion == 0)
                 return;
-            ResourceBundle resourceBundle = ResourceBundle.getBundle("answer", locale);
-            System.out.println(resourceBundle.getString(numberOfQuestion.toString()));
+            key = keys.get(numberOfQuestion-1);
+            System.out.println(resourceBundle.getString("message") + " "+ resourceBundle.getString(key)+ "\n");
         }
     }
 
