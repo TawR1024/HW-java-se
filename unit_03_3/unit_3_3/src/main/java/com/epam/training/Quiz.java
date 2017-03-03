@@ -48,9 +48,8 @@ public class Quiz {
 
     public void showQuestions() {
         ResourceBundle resourceBundle = ResourceBundle.getBundle("messages", locale);
-        System.out.println(locale.getLanguage());
         Enumeration<String> keys = resourceBundle.getKeys();
-        System.out.println(keys.toString());
+       // System.out.println(keys.toString());
         while (keys.hasMoreElements()) {
             String key = keys.nextElement();
             String question = resourceBundle.getString(key);
@@ -60,7 +59,6 @@ public class Quiz {
 
     public void startQuiz() {
         checkLocale();
-        showQuestions();
         showAnswer();
     }
 
@@ -80,7 +78,7 @@ public class Quiz {
 
     public void checkLocale() {
         if (locale == null) {
-            System.out.print("To select language press\n 1 - eng\n 2 - rus\n" +
+            System.out.print("To select language press\n 1 - rus\n 2 - eng\n" +
                     "Для выбора языка нажимите\n 1 - русский\n 2 - английский\n> ");
         }
         Scanner scanner = new Scanner(System.in);
