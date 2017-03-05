@@ -1,11 +1,8 @@
 package com.epam.training;
 
 import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
-
-import java.io.FileNotFoundException;
-
-import static org.junit.Assert.*;
 
 /**
  * Created by Ilya Kulakov on 04.03.17.
@@ -13,7 +10,7 @@ import static org.junit.Assert.*;
 public class TextParserTest {
         TextParser textParser;
 
-    @Before
+    @Test
     public void openFileTest(){
         textParser = new TextParser();
         textParser.openFile("src/main/resources/fileToParse.html");
@@ -21,6 +18,13 @@ public class TextParserTest {
 
     @Test
     public void parseFile(){
-            textParser.parseFile();
+            textParser.readFile();
+    }
+    @Test
+    public void showSentencesWithReferenceToPicture() {
+        textParser = new TextParser();
+        textParser.openFile("src/main/resources/fileToParse.html");
+        String  stringsFromFile = textParser.readFile();
+        textParser.showStringsWithPictures(stringsFromFile);
     }
 }
