@@ -1,4 +1,4 @@
-package com.epam.training;
+package com.epam.training.task1;
 
 import java.io.File;
 import java.io.FileInputStream;

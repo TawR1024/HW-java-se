@@ -1,8 +1,7 @@
 package com.epam.training;
 
+import com.epam.training.task1.ByteIOStreamss;
 import org.junit.Test;
-
-import java.io.InputStreamReader;
 
 /**
  * Created by Ilya Kulakov on 05.03.17.

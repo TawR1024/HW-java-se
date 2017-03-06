@@ -1,4 +1,4 @@
-package com.epam.training;
+package com.epam.training.task3;
 
 import java.io.*;
 

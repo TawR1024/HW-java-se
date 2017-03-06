@@ -1,8 +1,7 @@
 package com.epam.training;
 
+import com.epam.training.task3.RecoderUTF8To16;
 import org.junit.Test;
-
-import static org.junit.Assert.*;
 
 /**
  * Created by Ilya Kulakov on 06.03.17.
