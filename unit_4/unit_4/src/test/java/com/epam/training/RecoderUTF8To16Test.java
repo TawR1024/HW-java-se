@@ -12,5 +12,4 @@ public class RecoderUTF8To16Test {
         RecoderUTF8To16 recoderUTF8To16 = new RecoderUTF8To16();
         recoderUTF8To16.decodeFileToUTF16();
     }
-
 }
