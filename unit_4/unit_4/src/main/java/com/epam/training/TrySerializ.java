@@ -7,7 +7,9 @@ import java.io.Serializable;
  */
 public class TrySerializ implements Serializable {
     public int anInt = 0;
+    public int anInt2 = 0;
     public  Integer integer= 0;
+    public  String string = "skdjhfg";
     public  char aChar  = 'g';
-
+    public  char aChar2  = 'g';
 }

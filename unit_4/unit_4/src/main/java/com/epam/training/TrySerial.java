@@ -25,6 +25,7 @@ public class TrySerial {
             ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream);
             TrySerializ trySerializ = (TrySerializ) objectInputStream.readObject();
             System.out.println(trySerializ.aChar + " " + trySerializ.anInt);
+            fileInputStream.close();
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         } catch (IOException e) {
