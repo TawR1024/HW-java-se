@@ -27,8 +27,9 @@ public class ByteIOStreamss {
         try {
             FileInputStream inputStream = new FileInputStream(this.file);
             fromFile = new StringBuilder();
-            while (inputStream.read() != -1) {
-                fromFile.append((char) inputStream.read());
+            int charFromStream;
+            while ((charFromStream = inputStream.read()) != -1) {
+                fromFile.append((char)charFromStream);
             }
             inputStream.close();
         } catch (FileNotFoundException e) {

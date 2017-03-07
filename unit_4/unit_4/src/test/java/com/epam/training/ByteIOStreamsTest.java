@@ -8,9 +8,9 @@ import org.junit.Test;
  */
 public class ByteIOStreamsTest {
     @Test
-    public  void keyWordCounter() {
+    public void keyWordCounter() {
         ByteIOStreamss keyWordChecker = new ByteIOStreamss();
-        String pahtFile = "src/main/java/com/epam/training/TrySerial.java";
+        String pahtFile = "src/main/java/com/epam/training/JustForFun/TrySerial.java";
         keyWordChecker.openFile(pahtFile);
         keyWordChecker.readFile();
     }
