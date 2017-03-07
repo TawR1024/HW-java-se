@@ -31,7 +31,7 @@ public class FilmCollection implements Serializable {
         films.put(film, actorsFromFilm);
     }
 
-    public void  saveCollectionAsFile(String path) {
+    public void saveCollectionAsFile(String path) {
         File file = new File(path);
 
         try {
@@ -40,7 +40,7 @@ public class FilmCollection implements Serializable {
             ObjectOutputStream serializer = new ObjectOutputStream(new FileOutputStream(file));
             serializer.writeObject(this);
             serializer.close();
-        }catch (FileNotFoundException e){
+        } catch (FileNotFoundException e) {
             System.out.println("File at path " + file.getAbsolutePath() + " not exist!");
             e.printStackTrace();
         } catch (IOException e) {
@@ -48,5 +48,26 @@ public class FilmCollection implements Serializable {
         }
     }
 
+    public FilmCollection openCollectionFrom(String path) {
+
+        File fileToOpen = new File(path);
+        try {
+            if (!fileToOpen.exists())
+                throw new FileNotFoundException();
+
+            ObjectInputStream deserializer = new ObjectInputStream(new FileInputStream(fileToOpen));
+            FilmCollection filmCollection  = (FilmCollection )deserializer.readObject();
+            deserializer.close();
+            return filmCollection;
+        } catch (FileNotFoundException e) {
+            System.out.println("File at path " + fileToOpen.getAbsolutePath() + " not exist!");
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
 
 }

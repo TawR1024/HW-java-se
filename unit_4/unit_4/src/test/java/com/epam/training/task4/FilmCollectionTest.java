@@ -57,4 +57,12 @@ public class FilmCollectionTest {
         filmCollection.addFilm(film, actor);
     }
 
+@Test
+
+    public  void openCollectionFromTest(){
+       FilmCollection fc =  filmCollection.openCollectionFrom("src/main/resources/task_4.serialized");
+    System.out.println(fc.toString());
+
+}
+
 }
