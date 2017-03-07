@@ -5,6 +5,8 @@ package com.epam.training.com.epam.training.office;
  */
 public class OfficeAccessories implements Cost {
     long cost;
+    String manufactureName;
+
     public String getManufactureName() {
         return manufactureName;
     }
@@ -13,7 +15,6 @@ public class OfficeAccessories implements Cost {
         this.manufactureName = manufactureName;
     }
 
-    String manufactureName;
 
     @Override
     public long getCost() {
