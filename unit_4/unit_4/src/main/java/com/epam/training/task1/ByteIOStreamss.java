@@ -54,8 +54,11 @@ public class ByteIOStreamss {
             while (scanner.hasNext()) {
                 keys.add(scanner.next());
             }
+            fileInputStream.close();
         } catch (FileNotFoundException e) {
             System.out.println("File not found");
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 
