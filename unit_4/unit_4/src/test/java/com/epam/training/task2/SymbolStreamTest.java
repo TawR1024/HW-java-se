@@ -21,17 +21,19 @@ public class SymbolStreamTest {
     @Test
     public void readFile() throws Exception {
         keyWordCounter.readFile();
-
     }
 
     @Test
     public void analyseJavaFile() throws Exception {
-
+        keyWordCounter.readFile();
+        keyWordCounter.analyseJavaFile();
     }
 
     @Test
     public void writeResultToFile() throws Exception {
-
+        keyWordCounter.readFile();
+        keyWordCounter.analyseJavaFile();
+        keyWordCounter.writeResultToFile("src/main/java/com/epam/training/JustForFun/result.task2");
     }
 
 }

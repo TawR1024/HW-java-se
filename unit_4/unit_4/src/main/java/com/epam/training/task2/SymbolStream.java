@@ -2,13 +2,10 @@ package com.epam.training.task2;
 
 import com.epam.training.task1.ByteIOStreamss;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
-import java.util.List;
-import java.util.Map;
-import java.util.Scanner;
+import java.io.*;
+import java.util.*;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * Created by Ilya Kulakov on 07.03.17.
@@ -16,7 +13,7 @@ import java.util.Scanner;
 public class SymbolStream extends ByteIOStreamss {
     public File file;
     private String fromFile;
-    private List<String> keysWords;
+    public List<String> keyWords;
     private Map<String, Integer> result;
 
     @Override
@@ -53,24 +50,27 @@ public class SymbolStream extends ByteIOStreamss {
 
     @Override
     public void analyseJavaFile() {
-
+        result = new HashMap<>();
+        for (String key : keyWords) {
+            Pattern pattern = Pattern.compile(key);
+            Matcher matcher = pattern.matcher(fromFile);
+            int counter = 0;
+            while (matcher.find()) {
+                counter++;
+            }
+            result.put(key, counter);
+        }
     }
 
-    @Override
-    public void writeResultToFile(String path) {
-
-    }
 
     public void getBasicKeyWords() {
         try (FileReader fileReader = new FileReader("src/main/resources/JavaKeyWords")) {
             try (Scanner scanner = new Scanner(fileReader)) {
+                keyWords = new ArrayList<>();
                 while (scanner.hasNext()) {
-                    System.out.println(scanner.next());
-                    //keysWords.add(scanner.next());
+                    keyWords.add(scanner.next());
                 }
             }
-
-            //scanner.close();
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         } catch (IOException e) {
@@ -78,4 +78,13 @@ public class SymbolStream extends ByteIOStreamss {
         }
     }
 
+    @Override
+    public void writeResultToFile(String path) {
+        try (FileWriter fileWriter = new FileWriter(path)) {
+            fileWriter.write(result.toString());
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 }
