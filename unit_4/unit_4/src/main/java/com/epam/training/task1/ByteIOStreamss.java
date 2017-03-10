@@ -4,6 +4,9 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
 
 /**
  * Created by Ilya Kulakov on 05.03.17.
@@ -11,6 +14,11 @@ import java.io.IOException;
 public class ByteIOStreamss {
     private File file;
     private StringBuilder fromFile;
+    private List<String> keys;
+
+    public ByteIOStreamss(){
+        keys = new ArrayList<>();
+    }
 
     public void openFile(String pathFile) {
         file = new File(pathFile);
@@ -42,7 +50,21 @@ public class ByteIOStreamss {
         System.out.println(fromFile.toString());
     }
 
+        public void getBasicKeyWords() {
+            try {
+                FileInputStream fileInputStream = new FileInputStream("src/main/resources/JavaKeyWords");
+                Scanner scanner = new Scanner(fileInputStream);
+                while (scanner.hasNext()) {
+                    keys.add(scanner.next());
+                }
+
+            } catch (FileNotFoundException e) {
+                System.out.println("File not found");
+            }
+        }
 
 
-
+    public List<String> getKeys() {
+        return keys;
+    }
 }
