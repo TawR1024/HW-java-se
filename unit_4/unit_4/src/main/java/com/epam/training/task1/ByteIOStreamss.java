@@ -1,23 +1,20 @@
 package com.epam.training.task1;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Scanner;
+import java.io.*;
+import java.util.*;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * Created by Ilya Kulakov on 05.03.17.
  */
 public class ByteIOStreamss {
     private File file;
-    private StringBuilder fromFile;
     private List<String> keys;
+    private byte[] arrayOfSymbols;
+    private Map<String, Integer> result;
 
-    public ByteIOStreamss(){
-        keys = new ArrayList<>();
+    public ByteIOStreamss() {
     }
 
     public void openFile(String pathFile) {
@@ -31,40 +28,76 @@ public class ByteIOStreamss {
         }
     }
 
+    /**
+     * Read .java file using Byte I\O Stream.
+     * Shows reading result at the console
+     */
     public void readFile() {
-        try {
-            FileInputStream inputStream = new FileInputStream(this.file);
-            fromFile = new StringBuilder();
-            int charFromStream;
-            while ((charFromStream = inputStream.read()) != -1) {
-                fromFile.append((char)charFromStream);
-            }
-            inputStream.close();
+        keys = new ArrayList<>();
+        try (FileInputStream inputStream = new FileInputStream(this.file)) { // i understand how to use try-with-resources )
+            arrayOfSymbols = new byte[inputStream.available()];
+            inputStream.read(arrayOfSymbols);
         } catch (FileNotFoundException e) {
-            System.out.println("File at path " + file.getAbsolutePath() + " not found");
             e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
         }
-
-        System.out.println(fromFile.toString());
     }
 
-        public void getBasicKeyWords() {
-            try {
-                FileInputStream fileInputStream = new FileInputStream("src/main/resources/JavaKeyWords");
-                Scanner scanner = new Scanner(fileInputStream);
-                while (scanner.hasNext()) {
-                    keys.add(scanner.next());
-                }
+    /**
+     * read file which contains Java keywords
+     */
+    public void getBasicKeyWords() {
+        try {
+            FileInputStream fileInputStream = new FileInputStream("src/main/resources/JavaKeyWords");
+            Scanner scanner = new Scanner(fileInputStream);
+            while (scanner.hasNext()) {
+                keys.add(scanner.next());
+            }
+        } catch (FileNotFoundException e) {
+            System.out.println("File not found");
+        }
+    }
 
-            } catch (FileNotFoundException e) {
-                System.out.println("File not found");
+
+    /**
+     * Analyse file and count keywords.
+     */
+    public void analyseJavaFile() {
+        String analyseMe = new String(arrayOfSymbols);
+        result = new HashMap<>();
+        for (String keyword : keys) {
+            Pattern pattern = Pattern.compile(keyword);
+            Matcher matcher = pattern.matcher(analyseMe);
+            int counter = 0;
+            while (matcher.find()) {
+                counter++;
+            }
+            result.put(keyword, counter);
+        }
+    }
+
+    public void writeResultToFile(String path) {
+        File resultFile = new File(path);
+        if (!resultFile.exists()) {
+            try {
+                if (resultFile.createNewFile()) {
+                    System.out.println("Can`t create file!");
+                }
+                FileOutputStream fileOutputStream = new FileOutputStream(resultFile);
+                fileOutputStream.write(result.toString().getBytes());
+            } catch (IOException e) {
+                System.out.println("Problem with creating file at" + resultFile.getAbsolutePath());
+                e.printStackTrace();
             }
         }
-
+    }
 
     public List<String> getKeys() {
         return keys;
+    }
+
+    public Map<String, Integer> getResult() {
+        return result;
     }
 }
