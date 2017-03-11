@@ -10,7 +10,7 @@ import java.io.FileNotFoundException;
  */
 public class FSViewerTest {
 
-    String rootPath;
+    String rootPath = "/run";
     FSViewer fsViewer;
 
     @Before
@@ -20,6 +20,7 @@ public class FSViewerTest {
 
     @Test(expected = FileNotFoundException.class)
     public void showItemsAtWrongPathTest() {
+
         fsViewer.showItems();
     }
 

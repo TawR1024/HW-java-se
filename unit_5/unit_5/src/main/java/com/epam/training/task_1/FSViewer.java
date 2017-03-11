@@ -1,5 +1,6 @@
 package com.epam.training.task_1;
 
+import java.io.File;
 import java.util.Scanner;
 
 /**
@@ -15,6 +16,7 @@ public class FSViewer {
 
 
     public FSViewer() {
+
     }
 
     public FSViewer(String rootPath) {
@@ -28,7 +30,21 @@ public class FSViewer {
         if (path == null) {
             System.out.println("Wrong path. Pleas enter again\n");
             setPath(getPathFromSystemIn());
+        } else {
+            File dir = new File(path);
+            if (!path.equals("/")) {
+                path += File.separator;
+            }
+            if (dir.isDirectory()) {
+                for (String fileName : dir.list()) {
+                    File file = new File(path + fileName);
+                    System.out.println(file.isDirectory() ? (fileName + " d") :
+                            file.isFile() ? (fileName + " f") : fileName + " not file or dir");
+                }
+            }
+
         }
+
     }
 
     private String getPathFromSystemIn() {
