@@ -27,27 +27,29 @@ public class FSViewer {
      * Print to screen list of items at current path
      */
     public void showItems() {
-        if (path == null) {
-            System.out.println("Wrong path. Pleas enter again\n");
+        if (path == null)
             setPath(getPathFromSystemIn());
-        } else {
-            File dir = new File(path);
-            if (!path.equals("/")) {
-                path += File.separator;
-            }
-            if (dir.isDirectory()) {
-                for (String fileName : dir.list()) {
-                    File file = new File(path + fileName);
-                    System.out.println(file.isDirectory() ? (fileName + " d") :
-                            file.isFile() ? (fileName + " f") : fileName + " not file or dir");
-                }
-            }
 
+        File dir = new File(path);
+
+        if (!dir.exists())
+            setPath(getPathFromSystemIn());
+
+        if (!path.equals("/"))
+            path += File.separator;
+
+        if (dir.isDirectory()) {
+            for (String fileName : dir.list()) {
+                File file = new File(path + fileName);
+                System.out.println(file.isDirectory() ? (fileName + " d") :
+                        file.isFile() ? (fileName + " f") : fileName + " not file or dir");
+            }
         }
 
     }
 
     private String getPathFromSystemIn() {
+        System.out.println("Wrong path. Pleas enter again\n");
         Scanner scanner = new Scanner(System.in);
         String newPath = scanner.nextLine();
         return newPath;

@@ -3,14 +3,15 @@ package com.epam.training.task_1;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.io.FileNotFoundException;
+import java.io.ByteArrayInputStream;
+import java.io.InputStream;
 
 /**
  * Created by Ilya Kulakov on 11.03.17.
  */
 public class FSViewerTest {
 
-    String rootPath = "/run";
+    String rootPath;
     FSViewer fsViewer;
 
     @Before
@@ -18,11 +19,14 @@ public class FSViewerTest {
         fsViewer = new FSViewer(rootPath);
     }
 
-    @Test(expected = FileNotFoundException.class)
+    @Test
     public void showItemsAtWrongPathTest() {
-
+        String input = "/run";
+        InputStream in = new ByteArrayInputStream(input.getBytes());
+        System.setIn(in);
         fsViewer.showItems();
     }
+
 
     @Test
     public void showItemsAtPathTest() {
