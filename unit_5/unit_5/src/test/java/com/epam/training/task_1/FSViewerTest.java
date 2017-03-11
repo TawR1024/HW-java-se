@@ -1,9 +1,11 @@
 package com.epam.training.task_1;
 
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
 import java.io.ByteArrayInputStream;
+import java.io.FileNotFoundException;
 import java.io.InputStream;
 
 /**
@@ -20,16 +22,28 @@ public class FSViewerTest {
     }
 
     @Test
-    public void showItemsAtWrongPathTest() {
+    public void showItemsAtWrongPathTest() throws FileNotFoundException {
         String input = "/run";
         InputStream in = new ByteArrayInputStream(input.getBytes());
         System.setIn(in);
         fsViewer.showItems();
     }
 
+    @Test(expected = FileNotFoundException.class)
+    public void showItemsAtWrongPathThrowExTest() throws FileNotFoundException {
+        String input = "/asdf";
+        InputStream in = new ByteArrayInputStream(input.getBytes());
+        System.setIn(in);
+        fsViewer.showItems();
+    }
+
+    @After
+    public void returnSettings() {
+        System.setIn(System.in);
+    }
 
     @Test
-    public void showItemsAtPathTest() {
+    public void showItemsAtPathTest() throws FileNotFoundException {
         fsViewer.showItems();
     }
 

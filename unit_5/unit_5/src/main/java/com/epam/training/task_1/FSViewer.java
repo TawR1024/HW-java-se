@@ -1,6 +1,7 @@
 package com.epam.training.task_1;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.Scanner;
 
 /**
@@ -26,18 +27,17 @@ public class FSViewer {
     /**
      * Print to screen list of items at current path
      */
-    public void showItems() {
+    public void showItems() throws FileNotFoundException {
         if (path == null)
             setPath(getPathFromSystemIn());
 
         File dir = new File(path);
 
-        if (!dir.exists())
-            setPath(getPathFromSystemIn());
+//        if (!dir.exists())
+//            setPath(getPathFromSystemIn());
 
         if (!path.equals("/"))
             path += File.separator;
-
         if (dir.isDirectory()) {
             for (String fileName : dir.list()) {
                 File file = new File(path + fileName);
@@ -48,10 +48,14 @@ public class FSViewer {
 
     }
 
-    private String getPathFromSystemIn() {
+    private String getPathFromSystemIn() throws FileNotFoundException {
         System.out.println("Wrong path. Pleas enter again\n");
         Scanner scanner = new Scanner(System.in);
         String newPath = scanner.nextLine();
+        File file = new File(newPath);
+        if (!file.exists()) {
+            throw new FileNotFoundException("At path" + newPath);
+        }
         return newPath;
     }
 
