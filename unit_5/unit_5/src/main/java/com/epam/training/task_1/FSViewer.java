@@ -52,7 +52,7 @@ public class FSViewer {
     }
 
     /**
-     * @return
+     * @return strinf
      * @throws FileNotFoundException
      */
     private String getPathFromSystemIn() throws FileNotFoundException {
@@ -80,18 +80,11 @@ public class FSViewer {
 
     }
 
-    public void setPath(String path) {
-        this.currentPath = path;
-    }
-
-    public String getPath() {
-        return currentPath;
-    }
-
 
     /**
-     * @param path
-     * @param name
+     * Create file at path transmitted at parameters
+     * @param path where file will be created
+     * @param name name of file
      */
     public void createFileAt(String path, String name) {
         StringBuilder nameOfFile = new StringBuilder(path).append(File.separator).append(name);
@@ -105,6 +98,12 @@ public class FSViewer {
         }
     }
 
+    /**
+     * Append text to file in path
+     *
+     * @param path - absolute file name (path + name)
+     * @param text to append to the file
+     */
     public void addTextToFile(String path, String text) {
         File file = new File(path);
         try (FileWriter fileWriter = new FileWriter(file, true)) {
@@ -113,5 +112,13 @@ public class FSViewer {
             e.printStackTrace();
         }
 
+    }
+
+    public void setPath(String path) {
+        this.currentPath = path;
+    }
+
+    public String getPath() {
+        return currentPath;
     }
 }
