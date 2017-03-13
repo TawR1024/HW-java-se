@@ -23,16 +23,11 @@ public class FSViewerTest {
     }
 
     @Test
-    public void showItemsAtWrongPathTest() {
+    public void showItemsAtWrongPathTest() throws FileNotFoundException {
         String input = "/run";
         InputStream in = new ByteArrayInputStream(input.getBytes());
         System.setIn(in);
-        try {
-            fsViewer.showItems();
-        } catch (FileNotFoundException e) {
-            System.out.println(e.getMessage());
-            e.printStackTrace();
-        }
+        fsViewer.showItems();
     }
 
     @Test(expected = FileNotFoundException.class)
@@ -41,12 +36,7 @@ public class FSViewerTest {
         String input = "/asdf";
         InputStream in = new ByteArrayInputStream(input.getBytes());
         System.setIn(in);
-        try {
-            fsViewer.showItems();
-        } catch (FileNotFoundException e) {
-            System.out.println(e.getMessage());
-            e.printStackTrace();
-        }
+        fsViewer.showItems();
     }
 
     @After
