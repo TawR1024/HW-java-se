@@ -2,6 +2,8 @@ package com.epam.training.task_1;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.Scanner;
 
 /**
@@ -49,6 +51,10 @@ public class FSViewer {
 
     }
 
+    /**
+     * @return
+     * @throws FileNotFoundException
+     */
     private String getPathFromSystemIn() throws FileNotFoundException {
         System.out.println("Wrong path. Pleas enter again\n");
         Scanner scanner = new Scanner(System.in);
@@ -60,10 +66,14 @@ public class FSViewer {
         return newPath;
     }
 
+    /**
+     * @param path
+     * @param name
+     */
     public void createDirHere(String path, String name) {
-        StringBuilder nameOfir = new StringBuilder(path);
-        nameOfir.append(File.separator).append(name);
-        File directoryToCreate = new File(nameOfir.toString());
+        StringBuilder nameOfDirectory = new StringBuilder(path).append(File.separator).append(name);
+        ;
+        File directoryToCreate = new File(nameOfDirectory.toString());
         if (!directoryToCreate.exists()) {
             directoryToCreate.mkdir();
         }
@@ -79,4 +89,29 @@ public class FSViewer {
     }
 
 
+    /**
+     * @param path
+     * @param name
+     */
+    public void createFileAt(String path, String name) {
+        StringBuilder nameOfFile = new StringBuilder(path).append(File.separator).append(name);
+        File fileToCreate = new File(nameOfFile.toString());
+        if (!fileToCreate.exists()) {
+            try {
+                fileToCreate.createNewFile();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    public void addTextToFile(String path, String text) {
+        File file = new File(path);
+        try (FileWriter fileWriter = new FileWriter(file, true)) {
+            fileWriter.write(text + "\n");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+    }
 }

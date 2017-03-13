@@ -5,6 +5,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import java.io.ByteArrayInputStream;
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
 
@@ -54,5 +55,14 @@ public class FSViewerTest {
         fsViewer.createDirHere(fsViewer.getPath(), "TEstDir");
     }
 
+    @Test
+    public void createFileAtTest() {
+        fsViewer.createFileAt(fsViewer.getPath(), "NewTestFile.txt");
+    }
+
+    @Test
+    public void addTextToFileTest() {
+        fsViewer.addTextToFile(fsViewer.getPath() + File.separator + "NewTestFile.txt", "lore ipsum");
+    }
 
 }
