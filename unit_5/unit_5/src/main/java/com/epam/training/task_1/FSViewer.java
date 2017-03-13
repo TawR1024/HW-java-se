@@ -4,6 +4,9 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.nio.file.AccessDeniedException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.Scanner;
 
 /**
@@ -30,13 +33,13 @@ public class FSViewer {
      */
     public void showItems() throws FileNotFoundException {
         String path = currentPath;
-        if (path == null)
+        if (path.isEmpty())
             setPath(getPathFromSystemIn());
 
         File dir = new File(path);
 
         if (!dir.exists())
-            setPath(getPathFromSystemIn());
+            throw new FileNotFoundException("File at path: " + path + " not found!");
 
         if (!currentPath.equals("/")) {
             path += File.separator;
@@ -72,8 +75,9 @@ public class FSViewer {
      */
     public void createDirHere(String path, String name) {
         StringBuilder nameOfDirectory = new StringBuilder(path).append(File.separator).append(name);
-        ;
+
         File directoryToCreate = new File(nameOfDirectory.toString());
+
         if (!directoryToCreate.exists()) {
             directoryToCreate.mkdir();
         }
@@ -107,6 +111,9 @@ public class FSViewer {
     public void addTextToFile(String path, String text) {
         File file = new File(path);
         try (FileWriter fileWriter = new FileWriter(file, true)) {
+            if (!Files.isWritable(Paths.get(file.getAbsolutePath()))) {
+                throw new AccessDeniedException("Cannot Write to file invalid licence");
+            }
             fileWriter.write(text + "\n");
         } catch (IOException e) {
             e.printStackTrace();
