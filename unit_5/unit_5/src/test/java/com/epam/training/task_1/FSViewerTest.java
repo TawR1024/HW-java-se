@@ -13,7 +13,7 @@ import java.io.InputStream;
  */
 public class FSViewerTest {
 
-    String rootPath;
+    String rootPath = "/home/ilya-kulakov/";
     FSViewer fsViewer;
 
     @Before
@@ -30,6 +30,7 @@ public class FSViewerTest {
     }
 
     @Test(expected = FileNotFoundException.class)
+    //TODO: rewrite method.
     public void showItemsAtWrongPathThrowExTest() throws FileNotFoundException {
         String input = "/asdf";
         InputStream in = new ByteArrayInputStream(input.getBytes());
@@ -49,7 +50,8 @@ public class FSViewerTest {
 
     @Test
     public void createDirAtTest() {
-        fsViewer.createDirHere("Path");
+        //:TODO test logic
+        fsViewer.createDirHere(fsViewer.getPath(), "TEstDir");
     }
 
 

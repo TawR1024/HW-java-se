@@ -13,31 +13,32 @@ import java.util.Scanner;
  * Created by Ilya Kulakov on 11.03.17.
  */
 public class FSViewer {
-    private String path;
+    private String currentPath;
 
 
     public FSViewer() {
-
     }
 
     public FSViewer(String rootPath) {
-        this.path = rootPath;
+        this.currentPath = rootPath;
     }
 
     /**
      * Print to screen list of items at current path
      */
     public void showItems() throws FileNotFoundException {
+        String path = currentPath;
         if (path == null)
             setPath(getPathFromSystemIn());
 
         File dir = new File(path);
 
-//        if (!dir.exists())
-//            setPath(getPathFromSystemIn());
+        if (!dir.exists())
+            setPath(getPathFromSystemIn());
 
-        if (!path.equals("/"))
+        if (!currentPath.equals("/")) {
             path += File.separator;
+        }
         if (dir.isDirectory()) {
             for (String fileName : dir.list()) {
                 File file = new File(path + fileName);
@@ -59,17 +60,22 @@ public class FSViewer {
         return newPath;
     }
 
-    public void createDirHere(String path) {
+    public void createDirHere(String path, String name) {
+        StringBuilder nameOfir = new StringBuilder(path);
+        nameOfir.append(File.separator).append(name);
+        File directoryToCreate = new File(nameOfir.toString());
+        if (!directoryToCreate.exists()) {
+            directoryToCreate.mkdir();
+        }
 
-        throw new UnsupportedOperationException();
     }
 
     public void setPath(String path) {
-        this.path = path;
+        this.currentPath = path;
     }
 
     public String getPath() {
-        return path;
+        return currentPath;
     }
 
 
