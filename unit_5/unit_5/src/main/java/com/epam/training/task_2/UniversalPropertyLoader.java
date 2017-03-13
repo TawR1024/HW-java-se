@@ -1,8 +1,7 @@
 package com.epam.training.task_2;
 
-import java.util.Collections;
-import java.util.List;
 import java.util.Locale;
+import java.util.MissingResourceException;
 import java.util.ResourceBundle;
 
 /**
@@ -11,6 +10,7 @@ import java.util.ResourceBundle;
 public class UniversalPropertyLoader {
 
     String resource;
+    ResourceBundle resourceBundle;
 
     public UniversalPropertyLoader() {
     }
@@ -30,10 +30,21 @@ public class UniversalPropertyLoader {
 
     public void loadBundle(String resourceName) {
         Locale locale = new Locale("ru_Ru");
-        ResourceBundle resourceBundle = ResourceBundle.getBundle("catalog", locale);
-        List<String> keys = Collections.list(resourceBundle.getKeys());
-        for (String s : keys) {
-            System.out.println(s);
+        try {
+            resourceBundle = ResourceBundle.getBundle("catalog", locale);
+        } catch (MissingResourceException e) {
+            System.out.println("Resource" + resourceName + "not found");
+            e.printStackTrace();
+        }
+    }
+
+    public String getKey(String key) {
+        try {
+            return resourceBundle.getString(key);
+        } catch (MissingResourceException e) {
+            System.out.println("Ключ " + key + " не найден");
+            e.printStackTrace();
+            return null;
         }
     }
 }
