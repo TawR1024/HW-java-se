@@ -26,7 +26,13 @@ public class UniversalPropertyLoaderTest {
 
     @Test
     public void getKeyTest() {
-        assertEquals("Крабовидная туманность", loader.getKey("M1"));
+        assertEquals("Крабовидная туманность", loader.getKey("M1")[0]);
+    }
+
+    @Test
+
+    public void getWrongKeyTest() {
+        assertEquals(null, loader.getKey("M111")[0]);
     }
 
 }

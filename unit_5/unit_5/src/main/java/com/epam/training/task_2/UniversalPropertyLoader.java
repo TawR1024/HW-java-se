@@ -41,13 +41,15 @@ public class UniversalPropertyLoader {
         }
     }
 
-    public String getKey(String key) {
+    public String[] getKey(String key) {
+        String[] strings = new String[1];
         try {
-            return hashMap.get(key);
+            strings[0] = hashMap.get(key);
+            return strings;
         } catch (MissingResourceException e) {
             System.out.println("Ключ " + key + " не найден");
             e.printStackTrace();
-            return null;
+            return strings;
         }
     }
 }
