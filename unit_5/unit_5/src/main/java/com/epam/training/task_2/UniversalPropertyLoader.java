@@ -41,15 +41,21 @@ public class UniversalPropertyLoader {
         }
     }
 
-    public String[] getKey(String key) {
-        String[] strings = new String[1];
+    public List<String> getKey(String... keys) {
+        List<String> list = new ArrayList<>();
         try {
-            strings[0] = hashMap.get(key);
-            return strings;
-        } catch (MissingResourceException e) {
-            System.out.println("Ключ " + key + " не найден");
+            for (String key : keys) {
+                if (!hashMap.containsKey(key)) {
+                    throw new IllegalArgumentException(key);
+                }
+                System.out.println(hashMap.get(key));
+                list.add(hashMap.get(key));
+            }
+            return list;
+        } catch (IllegalArgumentException e) {
+            System.out.println("Ключ " + e.getMessage() + " не найден");
             e.printStackTrace();
-            return strings;
+            return Collections.EMPTY_LIST;
         }
     }
 }

@@ -4,6 +4,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import static junit.framework.Assert.assertEquals;
+import static junit.framework.Assert.assertTrue;
 
 
 /**
@@ -26,13 +27,13 @@ public class UniversalPropertyLoaderTest {
 
     @Test
     public void getKeyTest() {
-        assertEquals("Крабовидная туманность", loader.getKey("M1")[0]);
+        assertEquals("Крабовидная туманность", loader.getKey("M1").get(0));
     }
 
     @Test
 
     public void getWrongKeyTest() {
-        assertEquals(null, loader.getKey("M111")[0]);
+        assertTrue(loader.getKey("ajskdf").isEmpty());
     }
 
 }
