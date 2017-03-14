@@ -16,7 +16,7 @@ public class UniversalPropertyLoaderTest {
     @Before
     public void init() {
         loader = new UniversalPropertyLoader();
-        //loader.loadBundle("catalog");
+        loader.loadBundle("catalog");
     }
 
     @Test
