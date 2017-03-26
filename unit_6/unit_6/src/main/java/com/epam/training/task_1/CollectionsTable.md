@@ -1,4 +1,4 @@
-# unit_6
+# Collections Task 1
 
 Add information for end-users here.
 
