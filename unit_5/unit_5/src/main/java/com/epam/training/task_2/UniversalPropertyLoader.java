@@ -45,10 +45,8 @@ public class UniversalPropertyLoader {
         List<String> list = new ArrayList<>();
         try {
             for (String key : keys) {
-                if (!hashMap.containsKey(key)) {
+                if (!hashMap.containsKey(key))
                     throw new IllegalArgumentException(key);
-                }
-                System.out.println(hashMap.get(key));
                 list.add(hashMap.get(key));
             }
             return list;
