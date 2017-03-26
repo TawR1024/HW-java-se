@@ -20,6 +20,6 @@ class HeadDoctor extends Doctor {}
 | `Object object = new Nurse();`                          |  ✔   |      |All classes in java extends Object                                                                             |
 | `List<Doctor> doctors = new ArrayList<Doctor>();`       |  ✔   |      |Working with `ArrayList<Doctor>` by interface `List<Doctor>`                                                   |
 | `List<MedicalStaff> doctors = new ArrayList<Doctor>();` |      | ✔    |`ArrayList<Doctor>` is not a subtype of `List<MedicalStaff>`                                                   |
-| `List<Doctor> doctors = new ArrayList<MedicalStaff>();` |      |  ✔   |`ArrayList<MedicalStaff>` is not a subtype of `List<Doctor>                                                    |
+| `List<Doctor> doctors = new ArrayList<MedicalStaff>();` |      |  ✔   |`ArrayList<MedicalStaff>` is not a subtype of `List<Doctor>`                                                    |
 | `List<Object> doctors = new ArrayList<Doctor>();`       |      |  ✔   | `ArrayList<MedicalStaff>` is not a subtype of `List<Doctor>`                                                  |
 | `List<Object> doctors = new ArrayList<Object>();`       |  ✔   |      |Working with `ArrayList<Object>` by interface `List<Object>`                                                   |
