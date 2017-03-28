@@ -1,6 +1,5 @@
 package com.epam.training.task_2;
 
-import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.nio.file.Path;
@@ -10,7 +9,13 @@ import java.util.Objects;
 import java.util.Properties;
 
 /**
- * Created by Ilya Kulakov on 26.03.17.
+ * Universal property reader
+ *
+ * <br>This class used to work with property files. Property file will read only one time.</br>
+ *
+ * <br>Properies are storing at map <code>properties</code></br>
+ *
+ * <br>Created by Ilya Kulakov on 26.03.17.</br>
  */
 public class PropertiesReader {
     private final Map<String, String> properties;
@@ -20,10 +25,13 @@ public class PropertiesReader {
     }
 
     /**
-     * @param path
-     * @throws IOException
+     * Create object of PropertyReader.
+     * Here used pattern builder,
+     *
+     * @param path to file with properties. Can`t work with file wich name not end with .properties
+     * @throws IOException if file at path not found.
      */
-    public static PropertiesReader readPropertyFile(Path path) throws IOException {
+    public static PropertiesReader createPropertyReader(Path path) throws IOException {
 
         Properties properties = new Properties();
         try (FileInputStream fileInputStream = new FileInputStream(path.toFile())) {
