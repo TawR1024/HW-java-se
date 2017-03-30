@@ -12,9 +12,7 @@ import java.util.Properties;
  * Universal property reader
  *
  * <br>This class used to work with property files. Property file will read only one time.</br>
- *
  * <br>Properies are storing at map <code>properties</code></br>
- *
  * <br>Created by Ilya Kulakov on 26.03.17.</br>
  */
 public class PropertiesReader {
