@@ -1,5 +1,8 @@
 package com.epam.training.threads.task_3;
 
+import java.util.ArrayList;
+import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Random;
 
 /**
@@ -7,34 +10,14 @@ import java.util.Random;
  */
 
 public class UserResourceThread {
+    private static int THREADS = 10;
+
     public static void main(String[] args) throws InterruptedException {
         SharedResource res = new SharedResource();
-        IntegerSetterGetter t1 = new IntegerSetterGetter("1", res);
-        IntegerSetterGetter t2 = new IntegerSetterGetter("2", res);
-        IntegerSetterGetter t3 = new IntegerSetterGetter("3", res);
-        IntegerSetterGetter t4 = new IntegerSetterGetter("4", res);
-        IntegerSetterGetter t5 = new IntegerSetterGetter("5", res);
+        List<IntegerSetterGetter> threadPool = new ArrayList<>();
+        for (int i = 0; i < THREADS; i++)
+            threadPool.add(new IntegerSetterGetter(String.valueOf(i + 1), res));
 
-        t1.start();
-        t2.start();
-        t3.start();
-        t4.start();
-        t5.start();
 
-        Thread.sleep(100);
-
-        t1.stopThread();
-        t2.stopThread();
-        t3.stopThread();
-        t4.stopThread();
-        t5.stopThread();
-
-        t1.join();
-        t2.join();
-        t3.join();
-        t4.join();
-        t5.join();
-
-        System.out.println("main");
     }
 }
