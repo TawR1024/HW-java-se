@@ -3,8 +3,10 @@ package com.epam.training.threads.task_3;
 /**
  * Created by Ilya Kulakov on 30.03.17.
  */
+
 import java.util.ArrayList;
 import java.util.List;
+
 public class SharedResource {
     private List<Integer> list;
 

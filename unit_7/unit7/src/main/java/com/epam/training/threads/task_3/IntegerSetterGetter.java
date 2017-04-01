@@ -6,6 +6,7 @@ import java.util.Random;
  * Created by Ilya Kulakov on 30.03.17.
  */
 class IntegerSetterGetter extends Thread {
+
     private SharedResource resource;
     private boolean run;
 
@@ -47,7 +48,7 @@ class IntegerSetterGetter extends Thread {
             number = resource.getELement();
             while (number == null) {
                 System.out.println("Поток " + getName() + " ждет пока очередь заполнится.");
-                resource.wait();
+                resource.wait(10);
                 System.out.println("Поток " + getName() + " возобновил работу.");
                 number = resource.getELement();
             }
@@ -64,3 +65,4 @@ class IntegerSetterGetter extends Thread {
         }
     }
 }
+

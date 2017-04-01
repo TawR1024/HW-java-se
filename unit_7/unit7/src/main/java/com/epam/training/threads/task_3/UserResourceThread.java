@@ -15,8 +15,15 @@ public class UserResourceThread {
     public static void main(String[] args) throws InterruptedException {
         SharedResource res = new SharedResource();
         List<IntegerSetterGetter> threadPool = new ArrayList<>();
-        for (int i = 0; i < THREADS; i++)
+        for (int i = 0; i < THREADS; i++){
             threadPool.add(new IntegerSetterGetter(String.valueOf(i + 1), res));
+        }
+        threadPool.forEach(IntegerSetterGetter::run);
+        Thread.sleep(1000);
+        threadPool.forEach(IntegerSetterGetter::stopThread);
+        for (Thread thread : threadPool){
+            thread.join();
+        }
 
 
     }
