@@ -4,6 +4,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import java.io.File;
+import java.nio.file.NoSuchFileException;
 import java.util.Properties;
 
 import static org.hamcrest.core.Is.is;
@@ -18,11 +19,14 @@ public class UniversalPropertyReaderTest {
     public String propertyFile;
     public Properties properties;
 
-    @Before
+    @Test
     public void init(){
-        propertyFile ="/unit7/src/main/java/com/epam/training/threads/task_2";
-        Properties properties = new Properties();
-        reader = new UniversalPropertyReader();
+        propertyFile ="src/main/java/com/epam/training/threads/task_2/data.properties";
+        try {
+            reader = UniversalPropertyReader.builder(propertyFile);
+        } catch (NoSuchFileException e) {
+            e.printStackTrace();
+        }
     }
 
 
