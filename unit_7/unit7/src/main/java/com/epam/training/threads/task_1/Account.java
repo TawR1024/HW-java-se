@@ -26,4 +26,8 @@ public class Account {
         balance = balance + sum;
         return true;
     }
+
+    public int getOwnerId() {
+        return ownerId;
+    }
 }
