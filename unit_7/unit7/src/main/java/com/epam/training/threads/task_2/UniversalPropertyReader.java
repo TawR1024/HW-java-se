@@ -2,7 +2,6 @@ package com.epam.training.threads.task_2;
 
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.nio.file.NoSuchFileException;
 import java.util.Map;
@@ -35,29 +34,25 @@ public class UniversalPropertyReader extends Thread {
      * @return reference to UniversalPropertyReader object
      * @throws NoSuchFileException if file with properties not exist or path to file bad
      */
-    public static UniversalPropertyReader builder(String pathToProperties) throws NoSuchFileException {
+    public static UniversalPropertyReader builder(String pathToProperties) throws IOException {
         File propertyFile = new File(pathToProperties);
+
         if (!propertyFile.exists())
             throw new NoSuchFileException(propertyFile.getAbsolutePath().toString());
-      //  synchronized (propertyFile) {
+
+        synchronized (propertyFile) {
             if (cachedProperties.containsKey(pathToProperties)) {
                 return new UniversalPropertyReader(cachedProperties.get(pathToProperties));
             } else {
                 Properties properties = new Properties();
-
                 try (FileInputStream fileInputStream = new FileInputStream(propertyFile)) {
                     properties.load(fileInputStream);
-                } catch (FileNotFoundException e) {
-                    e.printStackTrace();
-                } catch (IOException e) {
-                    e.printStackTrace();
                 }
+
                 cachedProperties.put(pathToProperties, properties);
                 return new UniversalPropertyReader(properties);
             }
-
-      //  }
-
+        }
     }
 
     public String getProperty(String key) {

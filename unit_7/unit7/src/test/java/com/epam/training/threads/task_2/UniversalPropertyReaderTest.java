@@ -3,6 +3,7 @@ package com.epam.training.threads.task_2;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.io.IOException;
 import java.nio.file.NoSuchFileException;
 
 import static junit.framework.TestCase.assertTrue;
@@ -27,6 +28,8 @@ public class UniversalPropertyReaderTest {
             reader3 = UniversalPropertyReader.builder(propertyFile);
 
         } catch (NoSuchFileException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }
