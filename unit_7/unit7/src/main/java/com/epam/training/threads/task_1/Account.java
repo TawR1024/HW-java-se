@@ -4,6 +4,7 @@ package com.epam.training.threads.task_1;
  * Created by Ilya Kulakov on 01.04.17.
  */
 public class Account {
+
     private int balance;
     private int ownerId;
     private String ownerName;
@@ -29,5 +30,8 @@ public class Account {
 
     public int getOwnerId() {
         return ownerId;
+    }
+    public int getBalance() {
+        return balance;
     }
 }

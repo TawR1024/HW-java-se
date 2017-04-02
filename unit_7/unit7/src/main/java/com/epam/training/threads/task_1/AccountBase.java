@@ -21,4 +21,13 @@ public class AccountBase {
         return null;
     }
 
+        public int getAllMoney(){
+        int money =0;
+            for (Account account :
+                    accounts) {
+                money += account.getBalance();
+            }
+            return  money;
+        }
+
 }

@@ -1,13 +1,32 @@
 package com.epam.training.threads.task_1;
 
 import java.io.*;
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReentrantLock;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
  * Created by Ilya Kulakov on 02.04.17.
  */
-public class TransactionConcurent implements Runnable{
+public class TransactionConcurrent implements Runnable {
+   private String file;
+    private static Lock lock = new ReentrantLock();
+
+    public TransactionConcurrent(String file) {
+        this.file = file;
+    }
+
+    @Override
+    public void run() {
+        lock.lock();
+        try {
+            doBankOperation(file);
+        } catch (FileNotFoundException e) {
+
+        }
+
+    }
 
     public static void moneyTransfer(Account sender, Account recipient, int money) {
         if (sender.withdrawCash(money)) {
@@ -15,7 +34,7 @@ public class TransactionConcurent implements Runnable{
         }
     }
 
-    public String getTransferData(String transactionLog) throws FileNotFoundException {
+    private String getTransferData(String transactionLog) throws FileNotFoundException {
 
         File transferData = new File(transactionLog);
         if (!transferData.exists())
@@ -32,7 +51,7 @@ public class TransactionConcurent implements Runnable{
         return data;
     }
 
-    public Requisites dataParcer(String transferData) {
+    private Requisites dataParcer(String transferData) {
         Pattern transfer = Pattern.compile("(from: )([\\d])( to: )([\\d]+)( :)([\\d]+)(\\n)?");
         Matcher matcher = transfer.matcher(transferData);
         int senderId = 0;
@@ -51,13 +70,11 @@ public class TransactionConcurent implements Runnable{
         Requisites requisites = dataParcer(getTransferData(filePath));
         Account sender = AccountBase.getAccountById(requisites.from);
         Account recipient = AccountBase.getAccountById(requisites.to);
-        moneyTransfer(sender,recipient,requisites.sum);
+        moneyTransfer(sender, recipient, requisites.sum);
 
     }
 
-    public void run(){
-        doBankOperation();
-    }
+
 
     class Requisites {
         int from;
