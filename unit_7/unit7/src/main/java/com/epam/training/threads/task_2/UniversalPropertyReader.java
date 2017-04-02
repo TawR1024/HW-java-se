@@ -22,6 +22,11 @@ public class UniversalPropertyReader extends Thread {
         this.properties = properties;
     }
 
+    /**
+     * Cause we must read property file only one time.
+     * Map contains path to file as a Key, and reference to Properties object as a Value
+     */
+    private static Map<String, Properties> cachedProperties = new ConcurrentHashMap<>();
 
     /**
      * Builder for UniversalPropertyReader class
@@ -34,17 +39,28 @@ public class UniversalPropertyReader extends Thread {
         File propertyFile = new File(pathToProperties);
         if (!propertyFile.exists())
             throw new NoSuchFileException(propertyFile.getAbsolutePath().toString());
-        synchronized (propertyFile) {
-            Properties properties = new Properties();
-            try (FileInputStream fileInputStream = new FileInputStream(propertyFile)) {
-                properties.load(fileInputStream);
-            } catch (FileNotFoundException e) {
-                e.printStackTrace();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-            return new UniversalPropertyReader(properties);
-        }
+      //  synchronized (propertyFile) {
+            if (cachedProperties.containsKey(pathToProperties)) {
+                return new UniversalPropertyReader(cachedProperties.get(pathToProperties));
+            } else {
+                Properties properties = new Properties();
 
+                try (FileInputStream fileInputStream = new FileInputStream(propertyFile)) {
+                    properties.load(fileInputStream);
+                } catch (FileNotFoundException e) {
+                    e.printStackTrace();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                cachedProperties.put(pathToProperties, properties);
+                return new UniversalPropertyReader(properties);
+            }
+
+      //  }
+
+    }
+
+    public String getProperty(String key) {
+        return properties.getProperty(key);
     }
 }
