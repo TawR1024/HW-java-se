@@ -33,6 +33,7 @@ public class UniversalPropertyReader extends Thread {
      * @param pathToProperties path to file with properties
      * @return reference to UniversalPropertyReader object
      * @throws NoSuchFileException if file with properties not exist or path to file bad
+     *
      */
     public static UniversalPropertyReader builder(String pathToProperties) throws IOException {
         File propertyFile = new File(pathToProperties);
