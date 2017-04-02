@@ -1,27 +1,27 @@
 package com.epam.training.threads.task_1;
 
 import java.io.*;
-import java.util.concurrent.locks.Lock;
-import java.util.concurrent.locks.ReentrantLock;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
  * Created by Ilya Kulakov on 02.04.17.
  */
-public class TransactionConcurrent implements Runnable {
+public class TransactionSynchronized {
     private String file;
-    private static Lock lock = new ReentrantLock();
 
-    public TransactionConcurrent(String file) {
+    public TransactionSynchronized(String file) {
         this.file = file;
     }
 
 
     public static void moneyTransfer(Account sender, Account recipient, int money) {
-        System.out.println("Transfer money from " + sender.getOwnerId() + " to " + recipient.getOwnerId());
-        if (sender.withdrawCash(money)) {
-            recipient.addMoney(money);
+        System.out.println("Transfer money from" + sender.getOwnerId() + " to " + recipient.getOwnerId());
+        synchronized (sender){
+            if (sender.withdrawCash(money)) {
+                recipient.addMoney(money);
+            }
+
         }
     }
 
@@ -62,19 +62,6 @@ public class TransactionConcurrent implements Runnable {
         Account recipient = AccountBase.getAccountById(requisites.to);
         moneyTransfer(sender, recipient, requisites.sum);
 
-    }
-
-    @Override
-    public void run() {
-        lock.lock();
-
-        try {
-            doBankOperation(this.file);
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }
-
-        lock.unlock();
     }
 
 
