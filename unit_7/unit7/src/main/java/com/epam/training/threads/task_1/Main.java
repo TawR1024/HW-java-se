@@ -28,8 +28,27 @@ public class Main {
         executorService.execute(transactionConcurrent2);
         executorService.execute(transactionConcurrent3);
 
+
         try {
-            Thread.sleep(1000);
+            Thread.sleep(2000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+
+        System.out.println("----------------------------------------------------------");
+
+    TransactionSynchronized transfer1 = new TransactionSynchronized(path);
+    TransactionSynchronized transfer2 = new TransactionSynchronized(path);
+    TransactionSynchronized transfer3 = new TransactionSynchronized(path);
+
+    transfer1.start();
+    transfer2.start();
+    transfer3.start();
+        try {
+            transfer1.join();
+            transfer2.join();
+            transfer3.join();
         } catch (InterruptedException e) {
             e.printStackTrace();
         }

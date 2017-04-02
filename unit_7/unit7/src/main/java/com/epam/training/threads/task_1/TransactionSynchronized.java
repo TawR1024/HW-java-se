@@ -1,15 +1,15 @@
 package com.epam.training.threads.task_1;
 
 import java.io.*;
+import java.util.HashSet;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
  * Created by Ilya Kulakov on 02.04.17.
  */
-public class TransactionSynchronized {
+public class TransactionSynchronized  extends Thread{
     private String file;
-
     public TransactionSynchronized(String file) {
         this.file = file;
     }
@@ -41,27 +41,40 @@ public class TransactionSynchronized {
         return data;
     }
 
-    public Requisites dataParcer(String transferData) {
+    public HashSet<TransactionSynchronized.Requisites> dataParcer(String transferData) {
         Pattern transfer = Pattern.compile("(from: )([\\d])( to: )([\\d]+)( :)([\\d]+)(\\n)?");
         Matcher matcher = transfer.matcher(transferData);
-        int senderId = 0;
-        int recipientId = 0;
-        int sum = 0;
+        int senderId;
+        int recipientId;
+        int sum;
+        HashSet<TransactionSynchronized.Requisites> requisitesHashSet = new HashSet<>();
         while (matcher.find()) {
             senderId = Integer.valueOf(matcher.group(2).trim());
             recipientId = Integer.valueOf(matcher.group(4).trim());
             sum = Integer.valueOf(matcher.group(6).trim());
-
+            requisitesHashSet.add(new Requisites(senderId, recipientId, sum));
         }
-        return new Requisites(senderId, recipientId, sum);
+        return requisitesHashSet;
     }
 
     public void doBankOperation(String filePath) throws FileNotFoundException {
-        Requisites requisites = dataParcer(getTransferData(filePath));
-        Account sender = AccountBase.getAccountById(requisites.from);
-        Account recipient = AccountBase.getAccountById(requisites.to);
-        moneyTransfer(sender, recipient, requisites.sum);
+        HashSet<Requisites> requisites = dataParcer(getTransferData(filePath));
+        for (Requisites req :
+                requisites) {
+            Account sender = AccountBase.getAccountById(req.from);
+            Account recipient = AccountBase.getAccountById(req.to);
+            moneyTransfer(sender, recipient, req.sum);
 
+        }
+
+    }
+
+    public void run(){
+        try {
+            doBankOperation(this.file);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
     }
 
 
